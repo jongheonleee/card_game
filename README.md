@@ -1,7 +1,7 @@
 ## 데브캠프1기 oop 과제1
 ### [과제 개요] 
 - **과제 명 : oop 과제1 - 카드게임을 객체지향적으로 설계하고 코드로 작성하시오**
-- **상세 내용 :** [과제 RFP 노션 링크]([https://www.notion.so/RFP-1-oop-1-fc68701e92c94f028af69f1df80b42e8](https://www.notion.so/Java-OOP-041838642edd401d8be47216b62f1f2d))
+- **상세 내용 :** [과제 RFP 노션 링크]([https://www.notion.so/RFP-1-oop-1-fc68701e92c94f028af69f1df80b42e8](https://www.notion.so/Java-OOP-041838642edd401d8be47216b62f1f2d)
 - **( 수행 및 결과물 제출 기한 : 6/3 (월) 10:00 ~ 6/9 (일) 23:59 )**
 
 
