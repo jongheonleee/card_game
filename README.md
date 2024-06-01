@@ -7,6 +7,9 @@
 
 ### [과제 진행 및 제출 방법]
 - 기존 저장소(FastCampustKDTBackend/KDT_DBE1_Java-OOP_Assignment)를 Fork합니다.
+    - 패스트캠퍼스 깃헙은 Private 형태 (Public 불가)
+    - 반드시 개인 Repo로 작업 후 Fork한 레포로 옮겨오기 (포폴 활용 위함)
+    - 수강생 과제 간 브랜치 병합 문제를 최소화하고자 브랜치가 아닌 "Fork" 형태로 진행
 - 개별 레포의 최종 branch → 기존 업스트림 레포의 main branch **PR 상태**로 제출합니다.
     - **commit 메시지 : 수강생 성명 최종 제출 (EX. 김패캠 최종 제출)**
 - PR 제출 시 유의사항
