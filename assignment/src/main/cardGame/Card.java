@@ -1,8 +1,6 @@
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+package main.cardGame;
+
+import java.util.*;
 
 
 // 카드 정보 저장
