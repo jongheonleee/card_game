@@ -7,6 +7,8 @@ import java.util.*;
 public class Card {
 
     private final static List<String> patterns = Arrays.asList("SPADE", "DIAMOND", "HEART", "CLOVA");
+    private static final Integer MIN_NUMBER = 2;
+    private static final Integer MAX_NUMBER = 14;
 
     private String shape;
     private Integer number;
@@ -33,7 +35,7 @@ public class Card {
     }
 
     private boolean isValidNumber(Integer number) {
-        return (2 <= number && number <= 10);
+        return (MIN_NUMBER <= number && number <= MAX_NUMBER);
     }
 
     // 다른 무늬와 같은지 다른지 판반, boolean
