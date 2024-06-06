@@ -15,7 +15,7 @@ class PlayerTest {
     public void 객체_생성_성공() {
         Player player = new Player("test player");
         assertTrue(player != null);
-        assertTrue(player.getScore() == 0 && player.getLoss() == 0 && player.getWin() == 0);
+        assertTrue(player.getTotalScore() == 0 && player.getLoss() == 0 && player.getWin() == 0);
         assertTrue(player.getMoney() == 10_000);
         assertEquals("test player", player.getName());
     }
@@ -51,7 +51,7 @@ class PlayerTest {
 
         assertEquals(beforeLoss + 1, player.getLoss());
         assertEquals(beforeWin + 1, player.getWin());
-        assertEquals(0, player.getScore());
+        assertEquals(0, player.getTotalScore());
     }
 
     @DisplayName("승자 판단")
@@ -63,17 +63,17 @@ class PlayerTest {
         player1.increaseWin();
         player2.increaseLoss();
 
-        assertTrue(player1.isWinner(player2.getScore()) == 1);
+        assertTrue(player1.isWinner(player2.getTotalScore()) == 1);
 
         player1.increaseLoss();
         player2.increaseWin();
 
-        assertTrue(player1.isWinner(player2.getScore()) == 0);
+        assertTrue(player1.isWinner(player2.getTotalScore()) == 0);
 
         player1.increaseLoss();
         player2.increaseWin();
 
-        assertTrue(player1.isWinner(player2.getScore()) == -1);
+        assertTrue(player1.isWinner(player2.getTotalScore()) == -1);
 
     }
 

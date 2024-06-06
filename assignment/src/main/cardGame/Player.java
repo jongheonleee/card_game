@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 // 게임 참여자
-public class Player {
+public class Player implements Comparable {
 
     private static final Integer MIN_LENGTH = 1;
     private static final Integer MAX_LENGTH = 20;
@@ -14,6 +14,8 @@ public class Player {
 
     private String name;
     private int money;
+
+    private int score;
 
     private int win;
     private int loss;
@@ -75,11 +77,33 @@ public class Player {
         money += award;
     }
 
-    public int getScore() {
+    public int getTotalScore() {
         return win - loss;
     }
 
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
     public int isWinner(int otherScore) {
-        return getScore() == otherScore ? 0 : (getScore() >= otherScore ? 1 : -1);
+        return getTotalScore() == otherScore ? 0 : (getTotalScore() >= otherScore ? 1 : -1);
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        // 타입 확인
+        Player other = (Player) o;
+
+        if (this.getTotalScore() > other.getTotalScore()) {
+            return 1;
+        } else if (this.getTotalScore() == other.getTotalScore()) {
+            return 0;
+        } else {
+            return this.getName().compareTo(other.getName());
+        }
     }
 }
