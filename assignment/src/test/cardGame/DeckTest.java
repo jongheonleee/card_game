@@ -3,8 +3,8 @@ package test.cardGame;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
-import main.cardGame.Card;
-import main.cardGame.Deck;
+import main.cardGame.model.Card;
+import main.cardGame.model.Deck;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

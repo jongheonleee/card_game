@@ -1,10 +1,9 @@
-package main.cardGame;
+package main.cardGame.model;
 
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
 
 // 카드 관리 및 묶음
 public class Deck {

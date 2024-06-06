@@ -4,11 +4,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import main.cardGame.Card;
-import main.cardGame.Dealer;
-import main.cardGame.Deck;
-import main.cardGame.Player;
-import org.junit.Before;
+import main.cardGame.model.Card;
+import main.cardGame.model.Dealer;
+import main.cardGame.model.Deck;
+import main.cardGame.model.Player;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

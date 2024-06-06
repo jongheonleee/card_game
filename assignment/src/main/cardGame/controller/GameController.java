@@ -1,8 +1,11 @@
-package main.cardGame;
+package main.cardGame.controller;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import main.cardGame.model.Dealer;
+import main.cardGame.model.Deck;
+import main.cardGame.model.Player;
 
 // 전체 게임 애플리케이션 관장
 public class GameController {

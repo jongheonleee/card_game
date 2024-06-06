@@ -2,7 +2,7 @@ package test.cardGame;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import main.cardGame.Player;
+import main.cardGame.model.Player;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
