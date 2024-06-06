@@ -276,7 +276,7 @@ public class Dealer {
     }
 
     // 승자 발표, 승점 패점 부여
-    public void decideWinnerInRound() {
+    public List<Player> decideWinnerInRound() {
         int maxScore = players.stream()
                 .mapToInt(player -> player.getScore())
                 .max()
@@ -292,6 +292,12 @@ public class Dealer {
         players.stream()
                 .filter(player -> player.getScore() != maxScore)
                 .forEach(player -> player.increaseLoss());
+
+        List<Player> winners = players.stream()
+                .filter(player -> player.getScore() == maxScore)
+                .collect(Collectors.toList());
+
+        return winners;
 
     }
 
