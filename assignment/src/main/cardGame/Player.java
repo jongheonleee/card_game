@@ -106,4 +106,14 @@ public class Player implements Comparable {
             return this.getName().compareTo(other.getName());
         }
     }
+
+    @Override
+    public String toString() {
+        return "[name='" + name + '\'' +
+                ", money=" + money +
+                ", score=" + score +
+                ", win=" + win +
+                ", loss=" + loss +
+                ']';
+    }
 }

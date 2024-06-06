@@ -28,7 +28,7 @@ public class Dealer {
 
 
     // 각 플레이어의 점수 계산, 비교 대상, 비교 기준
-    private void calculateScore() {
+    public void calculateScore() {
         for (Player player : players) {
             if (isRoyalStraightPlush(player.getMyDeck())) {
                 player.setScore(13);
@@ -90,7 +90,7 @@ public class Dealer {
 
         for (int i=1; i<cards.size(); i++) {
             if (!(mark.getShape().equals(cards.get(i).getShape()))) return false;
-            if (!(2 + i == cards.get(i).getNumber())) return false;
+            if (!(1 + i == cards.get(i).getNumber())) return false;
         }
 
         return true;
@@ -183,8 +183,8 @@ public class Dealer {
         if (mark.getNumber() != 10)
             return false;
 
-        boolean isNotAllSameShape = cards.stream()
-                .allMatch(card -> card.isSameShape(mark.getShape()));
+        boolean isNotAllSameShape = !(cards.stream()
+                .allMatch(card -> card.isSameShape(mark.getShape())));
 
         boolean isNumberInOrder = true;
         for (int i=1; i<cards.size(); i++) {
@@ -200,8 +200,8 @@ public class Dealer {
         if (mark.getNumber() != 14)
             return false;
 
-        boolean isNotAllSameShape = cards.stream()
-                .allMatch(card -> card.isSameShape(mark.getShape()));
+        boolean isNotAllSameShape = !(cards.stream()
+                .allMatch(card -> card.isSameShape(mark.getShape())));
 
         boolean isNumberInOrder = true;
         for (int i=1; i<cards.size(); i++) {
@@ -214,8 +214,8 @@ public class Dealer {
     private boolean isStraight(List<Card> cards) {
         Card mark = cards.get(0);
 
-        boolean isNotAllSameShape = cards.stream()
-                .allMatch(card -> card.isSameShape(mark.getShape()));
+        boolean isNotAllSameShape = !(cards.stream()
+                .allMatch(card -> card.isSameShape(mark.getShape())));
 
         boolean isNumberInOrder = true;
         for (int i=1; i<cards.size(); i++) {
@@ -239,8 +239,6 @@ public class Dealer {
     }
 
     private boolean isTwoPair(List<Card> cards) {
-        boolean check = true;
-
         for (Card mark1 : cards) {
             for (Card mark2 : cards) {
                 if (mark1.getNumber() == mark2.getNumber()) continue;
@@ -248,16 +246,16 @@ public class Dealer {
                 if (!cards.stream()
                         .filter(card -> !card.equals(mark1))
                         .anyMatch(card -> card.getNumber() == mark1.getNumber())) {
-                    check = false;
+                    break;
                 }
 
                 if (!cards.stream()
                         .filter(card -> !card.equals(mark2))
                         .anyMatch(card -> card.getNumber() == mark2.getNumber())) {
-                    check = false;
+                    break;
                 }
 
-                if (check) return true;
+                return true;
             }
         }
 
@@ -286,7 +284,10 @@ public class Dealer {
 
         players.stream()
                 .filter(player -> player.getScore() == maxScore)
-                .forEach(player -> player.increaseWin());
+                .forEach(player -> {
+                    player.increaseWin();
+                    player.takeAward(100);
+                });
 
         players.stream()
                 .filter(player -> player.getScore() != maxScore)
