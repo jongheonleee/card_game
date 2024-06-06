@@ -41,7 +41,6 @@ public class Player implements Comparable {
     }
 
     public void takeDeck(List<Card> deck) {
-        myDeck.clear();
         myDeck = deck;
     }
 
