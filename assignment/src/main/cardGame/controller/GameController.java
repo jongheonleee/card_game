@@ -11,10 +11,8 @@ import main.cardGame.model.Player;
 public class GameController {
 
     private static final Scanner sc = new Scanner(System.in);
-    
     private Dealer dealer;
     private Deck deck;
-
     private int numberOfPlayer;
 
     public GameController() {
