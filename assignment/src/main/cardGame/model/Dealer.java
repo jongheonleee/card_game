@@ -3,13 +3,15 @@ package main.cardGame.model;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import main.framework.GameComponent;
 import main.framework.Player;
 
 // 게임 진행자, 게임 룰을 인지하고 있고 이를 통해 게임을 진행함
-public class Dealer {
+public class Dealer implements GameComponent {
 
     private Deck deck;
     private List<Player> players;
+
 
     public Dealer(Deck deck, List<Player> players) {
         this.deck = deck;

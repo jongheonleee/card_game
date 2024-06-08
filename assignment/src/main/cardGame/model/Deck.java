@@ -4,9 +4,10 @@ package main.cardGame.model;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import main.framework.GameComponent;
 
 // 카드 관리 및 묶음
-public class Deck {
+public class Deck implements GameComponent {
 
     private final static List<String> patterns = Arrays.asList("SPADE", "DIAMOND", "HEART", "CLOVA");
     private static final Integer MIN_NUMBER = 2;

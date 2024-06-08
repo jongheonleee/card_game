@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import main.cardGame.controller.GameController;
 import main.cardGame.factory.CardGamePlayerFactory;
+import main.cardGame.factory.GameComponentFactory;
 import main.cardGame.model.Dealer;
 import main.cardGame.model.Deck;
 import main.framework.Player;
@@ -17,6 +18,7 @@ public class Main {
         InputView inputView = InputView.getInstance();
         OutputView outputView = OutputView.getInstance();
         CardGamePlayerFactory playerFactory = CardGamePlayerFactory.getInstance();
+        GameComponentFactory gameComponentFactory = GameComponentFactory.getInstance();
 
         // 라운드 횟수 지정(요구사항에선 100)
         int numberOfRound = inputView.getNumberOfRounds();
@@ -38,7 +40,8 @@ public class Main {
         }
 
 
-        Deck deck = new Deck();
+        Deck deck = gameComponentFactory.getDeck();
+        Dealer newDealer = gameComponentFactory.getDealer();
         Dealer dealer = new Dealer(deck, players);
 
         // 애플리케이션 운영
