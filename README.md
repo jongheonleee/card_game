@@ -99,11 +99,11 @@
 
 ### 📌 2차 개발 진행 흐름 []
 
-[] GameController에서 view 분리
+[✅] GameController에서 view 분리
 
 [] DeckFactory : Deck을 생성하고 관리함, 또한 요청에 따라서 덱을 배분함 
 
-[] Card -> Enum : 특정 카드는 고유함, 상수 묶음으로써 Enum WJRdYD
+[] Card -> Enum : 특정 카드는 고유함, 상수 묶음으로써 Enum 적용
 
 [] Dealer의 계산 알고리즘 분리 : 전략 패턴 적용
 
