@@ -101,11 +101,11 @@
 
 [✅] GameController에서 view 분리
 
-[] PlayerFactory : Player를 생성하고 관리함
+[✅] PlayerFactory : Player를 생성하고 관리함
 
-[] DealerFactory : Dealer를 생성하고 관리함 
-
-[] DeckFactory : Deck을 생성하고 관리함, 또한 요청에 따라서 덱을 배분함 
+[] GameComponentFactory : 특정 게임에 필요한 객체(요소) 생성하고 관리함, Flyweight 패턴 
+( DealerFactory : Dealer를 생성하고 관리함, DeckFactory : Deck을 생성하고 관리함, 또한 요청에 따라서 덱을 배분함
+)
 
 [] Players : 이 객체 생성해서 Dealer 역할 축소(계산 알고리즘에 집중)
 
