@@ -94,15 +94,14 @@ public class Player implements Comparable {
 
     @Override
     public int compareTo(Object o) {
-        // 타입 확인
         Player other = (Player) o;
 
         if (this.getTotalScore() > other.getTotalScore()) {
             return 1;
         } else if (this.getTotalScore() == other.getTotalScore()) {
-            return 0;
-        } else {
             return this.getName().compareTo(other.getName());
+        } else {
+            return -1;
         }
     }
 
