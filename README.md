@@ -103,7 +103,7 @@
 
 [✅] PlayerFactory : Player를 생성하고 관리함
 
-[] GameComponentFactory : 특정 게임에 필요한 객체(요소) 생성하고 관리함, Flyweight 패턴 
+[✅] GameComponentFactory : 특정 게임에 필요한 객체(요소) 생성하고 관리함, Flyweight 패턴 
 ( DealerFactory : Dealer를 생성하고 관리함, DeckFactory : Deck을 생성하고 관리함, 또한 요청에 따라서 덱을 배분함
 )
 
