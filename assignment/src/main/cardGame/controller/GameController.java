@@ -1,11 +1,9 @@
 package main.cardGame.controller;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 import main.cardGame.model.Dealer;
 import main.cardGame.model.Deck;
-import main.cardGame.model.Player;
+import main.framework.Player;
 import main.cardGame.view.InputView;
 import main.cardGame.view.OutputView;
 
@@ -24,40 +22,29 @@ public class GameController {
 
     private final InputView input;
     private final OutputView output;
-    private Dealer dealer;
-    private Deck deck;
+
+    private final List<Player> players;
+    private final Dealer dealer;
+    private final Deck deck;
 
 
-    public GameController(InputView input, OutputView output) {
+    public GameController(InputView input, OutputView output, List<Player> players, Dealer dealer, Deck deck) {
         this.input = input;
         this.output = output;
-    }
-
-    private void ready(int numberOfPlayer) {
-        List<Player> players = new ArrayList<>();
-        // 밑에 for문을 굳이 컨트롤러가 알아야할까? 객체를 생성하는 로직이 굳이 여기에 쓸 필요가 있을까?
-        // 나중에 팩토리 패턴으로 생성과 사용을 불리하기
-        for (int i=0; i<numberOfPlayer; i++) {
-            String name = input.getPlayerName();
-            Player player = new Player(name);
-            players.add(player);
-        }
-
-        // 밑에도 마찬가지로 팩토리 패턴으로 생성과 사용을 불리하기
-        deck = new Deck();
-        dealer = new Dealer(deck, players);
+        this.players = players;
+        this.dealer = dealer;
+        this.deck = deck;
     }
 
 
-    public void play(int numberOfPlayer, int numberOfRound) {
-        ready(numberOfPlayer);
+
+    public void play(int numberOfRound) {
 
         // 게임 진행
         for (int i=1; i<=numberOfRound; i++) {
-            dealer.giveOutCards(numberOfPlayer);
+            dealer.giveOutCards(players.size());
             dealer.calculateScore();
             List<Player> winners = dealer.decideWinnerInRound();
-            output.showRoundWinner(i, winners);
         }
     }
 

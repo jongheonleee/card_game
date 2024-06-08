@@ -3,6 +3,7 @@ package main.cardGame.model;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import main.framework.Player;
 
 // 게임 진행자, 게임 룰을 인지하고 있고 이를 통해 게임을 진행함
 public class Dealer {
@@ -19,7 +20,7 @@ public class Dealer {
     public void giveOutCards(int amount) {
         List<List<Card>> splitCards = deck.splitCards(amount);
 
-        for (int i=0; i<amount; i++) {
+        for (int i=0; i< players.size(); i++) {
             List<Card> cards = splitCards.get(i);
             Player player = players.get(i);
             player.takeDeck(cards);

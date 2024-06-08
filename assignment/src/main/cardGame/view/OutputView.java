@@ -1,7 +1,7 @@
 package main.cardGame.view;
 
 import java.util.List;
-import main.cardGame.model.Player;
+import main.framework.Player;
 
 public class OutputView {
 

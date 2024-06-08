@@ -2,18 +2,19 @@ package test.cardGame;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import main.cardGame.model.Player;
+import main.cardGame.model.CardPlayer;
+import main.framework.Player;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-class PlayerTest {
+class CardPlayerTest {
 
     @DisplayName("객체 생성 성공")
     @Test
     public void 객체_생성_성공() {
-        Player player = new Player("test player");
+        Player player = new CardPlayer("test player");
         assertTrue(player != null);
         assertTrue(player.getTotalScore() == 0 && player.getLoss() == 0 && player.getWin() == 0);
         assertTrue(player.getMoney() == 10_000);
@@ -25,14 +26,14 @@ class PlayerTest {
     @ValueSource(strings = {"", "the name's length is over the maximum"})
     public void 객체_생성_실패(String wrongName) {
         assertThrows(IllegalArgumentException.class,
-                () -> new Player(wrongName));
+                () -> new CardPlayer(wrongName));
     }
 
     @DisplayName("상금 계산 기능 테스트")
     @ParameterizedTest
     @ValueSource(ints = {0, 1, 10, 100, 1_000, 10_000})
     public void 상금_계산(int amount) {
-        Player player = new Player("test");
+        Player player = new CardPlayer("test");
         int beforeMoney = player.getMoney();
 
         player.takeAward(amount);
@@ -42,7 +43,7 @@ class PlayerTest {
     @DisplayName("승수/패수 증가 테스트")
     @Test
     public void 승_증가_패_증가() {
-        Player player = new Player("test");
+        Player player = new CardPlayer("test");
         int beforeWin = player.getWin();
         int beforeLoss = player.getLoss();
 
@@ -57,8 +58,8 @@ class PlayerTest {
     @DisplayName("승자 판단")
     @Test
     public void 승자_판단() {
-        Player player1 = new Player("test1");
-        Player player2 = new Player("test2");
+        Player player1 = new CardPlayer("test1");
+        Player player2 = new CardPlayer("test2");
 
         player1.increaseWin();
         player2.increaseLoss();

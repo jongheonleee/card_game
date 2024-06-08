@@ -7,7 +7,8 @@ import java.util.List;
 import main.cardGame.model.Card;
 import main.cardGame.model.Dealer;
 import main.cardGame.model.Deck;
-import main.cardGame.model.Player;
+import main.cardGame.model.CardPlayer;
+import main.framework.Player;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -27,7 +28,7 @@ class DealerTest {
         players = new ArrayList<>();
 
         for (int i=0; i<5; i++) {
-            Player player = new Player("test" + i);
+            Player player = new CardPlayer("test" + i);
             players.add(player);
         }
 

@@ -5,6 +5,17 @@ import java.util.regex.Pattern;
 
 public class InputView {
 
+    private static final Integer MIN_ROUND_COUNT = 1;
+    private static final Integer MAX_ROUND_COUNT = 10_000;
+    private static final String WRONG_ROUND_COUNT = "잘못된 게임 라운드 수입니다. 허용 가능한 라운드 수는 1~10,000입니다. 다시 입력해주세요";
+
+
+    private static final Integer MIN_NUMBER_OF_PLAYER = 2;
+    private static final Integer MAX_NUMBER_OF_PLAYER = 4;
+
+    private static final String WRONG_NUMBER_OF_PLAYER = "잘못된 플레이어 수 입니다. 허용 가능한 플레이어 수는 2~4명입니다. 다시 입력해주세요";
+
+
     private static final String GAME_START_MESSAGE = "========[포커 게임]========\n";
     private static final String ASK_NUMBER_OF_PLAYER = "플레이어 수를 입력해주세요(최소 2~4) > ";
     private static final String ASK_PLAYER_NAME = "플레이어의 닉네임을 입력해주세요(글자수 1~20) > ";
@@ -22,8 +33,20 @@ public class InputView {
     public int getNumberOfPlayer() {
         System.out.println(GAME_START_MESSAGE);
         System.out.println(ASK_NUMBER_OF_PLAYER);
-        String input = getInput();
-        return parseInt(input);
+
+        try {
+            String input = getInput();
+            int numberOfPlayer = parseInt(input);
+
+            if (!(MIN_NUMBER_OF_PLAYER <= numberOfPlayer && numberOfPlayer <= MAX_NUMBER_OF_PLAYER)) {
+                throw new IllegalArgumentException(WRONG_NUMBER_OF_PLAYER);
+            }
+
+            return numberOfPlayer;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return getNumberOfPlayer();
+        }
     }
 
     public String getPlayerName() {
@@ -33,8 +56,19 @@ public class InputView {
 
     public int getNumberOfRounds() {
         System.out.println(ASK_NUMBER_OF_ROUNDS);
-        String input = getInput();
-        return parseInt(input);
+
+        try {
+            String input = getInput();
+            int numberOfRound = parseInt(input);
+            if (!(MIN_ROUND_COUNT <= numberOfRound && numberOfRound <= MAX_ROUND_COUNT)) {
+                throw new IllegalArgumentException(WRONG_ROUND_COUNT);
+            }
+
+            return numberOfRound;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return getNumberOfRounds();
+        }
     }
 
     private String getInput() {

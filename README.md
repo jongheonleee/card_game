@@ -101,7 +101,13 @@
 
 [✅] GameController에서 view 분리
 
+[] PlayerFactory : Player를 생성하고 관리함
+
+[] DealerFactory : Dealer를 생성하고 관리함 
+
 [] DeckFactory : Deck을 생성하고 관리함, 또한 요청에 따라서 덱을 배분함 
+
+[] Players : 이 객체 생성해서 Dealer 역할 축소(계산 알고리즘에 집중)
 
 [] Card -> Enum : 특정 카드는 고유함, 상수 묶음으로써 Enum 적용
 

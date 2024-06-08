@@ -2,9 +2,10 @@ package main.cardGame.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import main.framework.Player;
 
 // 게임 참여자
-public class Player implements Comparable {
+public class CardPlayer implements Player {
 
     private static final Integer MIN_LENGTH = 1;
     private static final Integer MAX_LENGTH = 20;
@@ -22,7 +23,7 @@ public class Player implements Comparable {
 
     private List<Card> myDeck = new ArrayList<>();
 
-    public Player(String name) {
+    public CardPlayer(String name) {
         valid(name);
         this.name = name;
         this.money = MONEY;
@@ -40,54 +41,67 @@ public class Player implements Comparable {
         return (name != null && MIN_LENGTH <= name.length() && name.length() <= MAX_LENGTH);
     }
 
+    @Override
     public void takeDeck(List<Card> deck) {
         myDeck = deck;
     }
 
+    @Override
     public List<Card> getMyDeck() {
         return myDeck;
     }
 
+    @Override
     public String getName() {
         return name;
     }
 
+    @Override
     public int getMoney() {
         return money;
     }
 
+    @Override
     public int getWin() {
         return win;
     }
 
+    @Override
     public int getLoss() {
         return loss;
     }
 
+    @Override
     public void increaseWin() {
         win++;
     }
 
+    @Override
     public void increaseLoss() {
         loss++;
     }
 
+    @Override
     public void takeAward(int award) {
         money += award;
     }
 
+    @Override
     public int getTotalScore() {
         return win - loss;
     }
 
+    @Override
     public void setScore(int score) {
         this.score = score;
     }
 
+    @Override
     public int getScore() {
         return score;
     }
 
+    @Override
     public int isWinner(int otherScore) {
         return getTotalScore() == otherScore ? 0 : (getTotalScore() >= otherScore ? 1 : -1);
     }
