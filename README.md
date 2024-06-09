@@ -70,8 +70,8 @@
   - 최종 결과 출력(승리의 수가 많은 플레이어부터 정렬) 
 
 ### 📌 클래스 다이어그램 
+<img width="633" alt="스크린샷 2024-06-10 오전 12 13 06" src="https://github.com/jongheonleee/KDT_DBE1_Java-OOP_Assignment/assets/87258372/7c8df986-4fd1-4685-b9c7-805faae07d97">
 
-![스크린샷 2024-06-10 오전 12.13.06.png](..%2F..%2FDesktop%2F%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202024-06-10%20%EC%98%A4%EC%A0%84%2012.13.06.png)
 
 ### 📌 1차 개발 진행 흐름 [✅]
 
