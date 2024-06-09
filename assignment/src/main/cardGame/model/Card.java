@@ -1,10 +1,11 @@
 package main.cardGame.model;
 
 import java.util.*;
+import main.framework.GameComponent;
 
 
 // 카드 정보 저장
-public class Card {
+public class Card implements GameComponent {
 
     private final static List<String> patterns = Arrays.asList("SPADE", "DIAMOND", "HEART", "CLOVA");
     private static final Integer MIN_NUMBER = 2;

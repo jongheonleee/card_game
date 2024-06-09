@@ -9,29 +9,14 @@ import main.framework.Player;
 // 게임 진행자, 게임 룰을 인지하고 있고 이를 통해 게임을 진행함
 public class Dealer implements GameComponent {
 
-    private Deck deck;
-    private List<Player> players;
-
-
-    public Dealer(Deck deck, List<Player> players) {
-        this.deck = deck;
-        this.players = players;
+    public Dealer() {
     }
 
     // 각 플레이어에게 카드 배분
-    public void giveOutCards(int amount) {
-        List<List<Card>> splitCards = deck.splitCards(amount);
-
-        for (int i=0; i< players.size(); i++) {
-            List<Card> cards = splitCards.get(i);
-            Player player = players.get(i);
-            player.takeDeck(cards);
-        }
-    }
 
 
     // 각 플레이어의 점수 계산, 비교 대상, 비교 기준
-    public void calculateScore() {
+    public void calculateScore(List<Player> players) {
         for (Player player : players) {
             if (isRoyalStraightPlush(player.getMyDeck())) {
                 player.setScore(13);
@@ -276,39 +261,6 @@ public class Dealer implements GameComponent {
         }
 
         return false;
-    }
-
-    // 승자 발표, 승점 패점 부여
-    public List<Player> decideWinnerInRound() {
-        int maxScore = players.stream()
-                .mapToInt(player -> player.getScore())
-                .max()
-                .getAsInt();
-
-        players.stream()
-                .filter(player -> player.getScore() == maxScore)
-                .forEach(player -> {
-                    player.increaseWin();
-                    player.takeAward(100);
-                });
-
-        players.stream()
-                .filter(player -> player.getScore() != maxScore)
-                .forEach(player -> player.increaseLoss());
-
-        List<Player> winners = players.stream()
-                .filter(player -> player.getScore() == maxScore)
-                .collect(Collectors.toList());
-
-        return winners;
-
-    }
-
-    // 최종 결과 발표
-    public List<Player> decideWinner() {
-        return players.stream()
-                .sorted(Collections.reverseOrder())
-                .toList();
     }
 
 }

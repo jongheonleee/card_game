@@ -1,11 +1,16 @@
 package main.cardGame.controller;
 
+import java.util.ArrayList;
 import java.util.List;
+import main.cardGame.factory.GameComponentFactory;
+import main.cardGame.model.Card;
 import main.cardGame.model.Dealer;
 import main.cardGame.model.Deck;
+import main.cardGame.model.Players;
 import main.framework.Player;
 import main.cardGame.view.InputView;
 import main.cardGame.view.OutputView;
+import main.framework.PlayerFactory;
 
 // 전체 게임 애플리케이션 관장
 public class GameController {
@@ -23,89 +28,65 @@ public class GameController {
     private final InputView input;
     private final OutputView output;
 
-    private final List<Player> players;
-    private final Dealer dealer;
-    private final Deck deck;
+    private final PlayerFactory playerFactory;
+
+    private final GameComponentFactory gameComponentFactory;
+
+    private Players players;
+    private Dealer dealer;
+    private Deck deck;
 
 
-    public GameController(InputView input, OutputView output, List<Player> players, Dealer dealer, Deck deck) {
+    public GameController(InputView input, OutputView output, PlayerFactory playerFactory, GameComponentFactory gameComponentFactory) {
         this.input = input;
         this.output = output;
-        this.players = players;
-        this.dealer = dealer;
-        this.deck = deck;
+        this.playerFactory = playerFactory;
+        this.gameComponentFactory = gameComponentFactory;
     }
 
+    public void createGameComponent() {
+        // 플레이어 생성
+        List<Player> list = new ArrayList<>();
+        int numberOfPlayer = input.getNumberOfPlayer();
 
-
-    public void play(int numberOfRound) {
-
-        // 게임 진행
-        for (int i=1; i<=numberOfRound; i++) {
-            dealer.giveOutCards(players.size());
-            dealer.calculateScore();
-            List<Player> winners = dealer.decideWinnerInRound();
-        }
-    }
-
-    public int askNumberOfPlayer() {
-        try {
-            int numberOfPlayer = input.getNumberOfPlayer();
-            if (!(MIN_NUMBER_OF_PLAYER <= numberOfPlayer && numberOfPlayer <= MAX_NUMBER_OF_PLAYER)) {
-                throw new IllegalArgumentException(WRONG_NUMBER_OF_PLAYER);
+        // n명의 플레이어가 정상적으로 생성될 때까지 반복
+        while (numberOfPlayer > 0) {
+            try {
+                String name = input.getPlayerName();
+                Player player = playerFactory.create(name);
+                list.add(player);
+                numberOfPlayer--;
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
             }
+        }
 
-            return numberOfPlayer;
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return askNumberOfPlayer();
+        players = gameComponentFactory.createPlayers(list);
+        deck = gameComponentFactory.createDeck();
+        dealer = gameComponentFactory.createDealer();
+    }
+
+
+
+    public void play() {
+        int numberOfRound = input.getNumberOfRounds();
+        int award = 100;
+        for (int currRound=1; currRound<=numberOfRound; currRound++) {
+            round(currRound, award);
         }
     }
 
-    public int askNumberOfRound() {
-        try {
-            int numberOfRounds = input.getNumberOfRounds();
-            if (!(MIN_ROUND_COUNT <= numberOfRounds && numberOfRounds <= MAX_ROUND_COUNT)) {
-                throw new IllegalArgumentException(WRONG_ROUND_COUNT);
-            }
-
-            return numberOfRounds;
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return askNumberOfRound();
-        }
+    public void round(int currRound, int award) {
+        List<List<Card>> splitCards = deck.splitCards(players.getPlayers().size());
+        players.giveOutCards(splitCards);
+        dealer.calculateScore(players.getPlayers());
+        List<Player> winners = players.decideWinnerInRound(award);
+        output.showRoundWinner(currRound, winners);
     }
-//
-//    // 사용자로부터 몇명 플레이할 건지 물어보고 입력 받음
-//    public int ready(int numberOfPlayer) {
-//        // 사용자에게 게임 시작한다고 알림
-//        // 게임에 필요한 값들 입력 받기
-//        // 게임에 필요한 객체들 생성
-////        int numberOfPlayer = input.getNumberOfPlayer();
-////        System.out.println("플레이어 수를 입력해주세요(최소 2~4) > ");
-////        numberOfPlayer = sc.nextInt();
-//
-//        List<Player> players = new ArrayList<>();
-//        // 밑에 for문을 굳이 컨트롤러가 알아야할까? 객체를 생성하는 로직이 굳이 여기에 쓸 필요가 있을까?
-//        // 나중에 팩토리 패턴으로 생성과 사용을 불리하기
-//        for (int i=0; i<numberOfPlayer; i++) {
-//            String name = input.getPlayerName();
-//
-//            Player player = new Player(name);
-//            players.add(player);
-//        }
-//
-//        // 밑에도 마찬가지로 팩토리 패턴으로 생성과 사용을 불리하기
-//        deck = new Deck();
-//        dealer = new Dealer(deck, players);
-//
-//        return numberOfPlayer;
-//    }
 
-    // 사용자에게 게임 결과를 출력해줌
     
     public void end() {
-        List<Player> winners = dealer.decideWinner();
+        List<Player> winners = players.decideWinner();
         output.showFinalWinner(winners);
     }
 
