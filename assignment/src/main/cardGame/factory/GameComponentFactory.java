@@ -6,6 +6,8 @@ import java.util.Map;
 import main.cardGame.model.Dealer;
 import main.cardGame.model.Deck;
 import main.cardGame.model.Players;
+import main.cardGame.service.CardGameStrategy;
+import main.cardGame.service.GameStrategy;
 import main.framework.GameComponent;
 import main.framework.Player;
 
@@ -30,7 +32,8 @@ public class GameComponentFactory {
     public synchronized Dealer createDealer() {
         GameComponent target = pool.get("dealer");
         if (target == null) {
-            target = new Dealer();
+            GameStrategy strategy = new CardGameStrategy();
+            target = new Dealer(strategy);
             pool.put("dealer", target);
         }
 
