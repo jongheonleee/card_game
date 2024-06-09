@@ -14,22 +14,9 @@ import main.framework.PlayerFactory;
 
 // 전체 게임 애플리케이션 관장
 public class GameController {
-
-    private static final Integer MIN_ROUND_COUNT = 1;
-    private static final Integer MAX_ROUND_COUNT = 10_000;
-
-    private static final Integer MIN_NUMBER_OF_PLAYER = 2;
-    private static final Integer MAX_NUMBER_OF_PLAYER = 4;
-
-    private static final String WRONG_NUMBER_OF_PLAYER = "잘못된 플레이어 수 입니다. 허용 가능한 플레이어 수는 2~4명입니다. 다시 입력해주세요";
-
-    private static final String WRONG_ROUND_COUNT = "잘못된 게임 라운드 수입니다. 허용 가능한 라운드 수는 1~10,000입니다. 다시 입력해주세요";
-
     private final InputView input;
     private final OutputView output;
-
     private final PlayerFactory playerFactory;
-
     private final GameComponentFactory gameComponentFactory;
 
     private Players players;
@@ -61,6 +48,8 @@ public class GameController {
             }
         }
 
+        // 팩토리를 통해서 애플리케이션에 필요한 인스턴스 생성 & 등록
+        // 컨트롤러에서는 사용만함
         players = gameComponentFactory.createPlayers(list);
         deck = gameComponentFactory.createDeck();
         dealer = gameComponentFactory.createDealer();
@@ -69,24 +58,40 @@ public class GameController {
 
 
     public void play() {
+        // 사용자로부터 라운드 횟수, 상점 입력 받음
         int numberOfRound = input.getNumberOfRounds();
-        int award = 100;
+        int award = input.getAward();
+
+        // 해당 라운드 만큼 게임 진행(요구사항에서는 100)
         for (int currRound=1; currRound<=numberOfRound; currRound++) {
             round(currRound, award);
         }
     }
 
     public void round(int currRound, int award) {
-        List<List<Card>> splitCards = deck.splitCards(players.getPlayers().size());
+        // 덱이 카드 섞고 나눔
+        int numberOfPlayer = players.getPlayers().size();
+        List<List<Card>> splitCards = deck.splitCards(numberOfPlayer);
+
+        // 나눈 카드를 플레이어에게 각각 배분
         players.giveOutCards(splitCards);
+
+        // 딜러가 각 플레이어의 점수 계산
         dealer.calculateScore(players.getPlayers());
+
+        // 해당 라운드 승자 추출
         List<Player> winners = players.decideWinnerInRound(award);
+
+        // 해당 라운드 승자 출력
         output.showRoundWinner(currRound, winners);
     }
 
     
     public void end() {
+        // 최종 우승자 추출
         List<Player> winners = players.decideWinner();
+
+        // 최종 우승자 출력
         output.showFinalWinner(winners);
     }
 
