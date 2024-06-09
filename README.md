@@ -107,15 +107,14 @@
 ( DealerFactory : Dealer를 생성하고 관리함, DeckFactory : Deck을 생성하고 관리함, 또한 요청에 따라서 덱을 배분함
 )
 
-[] Players : 이 객체 생성해서 Dealer 역할 축소(계산 알고리즘에 집중)
+[✅] Players : 이 객체 생성해서 Dealer 역할 축소(계산 알고리즘에 집중)
 
 [] Card -> Enum : 특정 카드는 고유함, 상수 묶음으로써 Enum 적용
 
-[] Dealer의 계산 알고리즘 분리 : 전략 패턴 적용
+[✅] Dealer의 계산 알고리즘 분리 : 전략 패턴 적용
 
-[] Dealer 싱글톤 패턴 적용 
 
-[] Dealer가 너무 많은 것을 알고있음, 이 부분 분리해내기
+[✅] Dealer가 너무 많은 것을 알고있음, 이 부분 분리해내기
 - 1차 개발, Dealer가 Deck도 가지고 있고 Players도 가지고 있음
 - 이 부분 iv로 가지고 있지말고 필요한 값만 매개변수로 넘겨서 진행
 
