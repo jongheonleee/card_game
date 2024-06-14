@@ -24,6 +24,7 @@ public class GameController {
     private Deck deck;
 
 
+
     public GameController(InputView input, OutputView output, PlayerFactory playerFactory, GameComponentFactory gameComponentFactory) {
         this.input = input;
         this.output = output;

@@ -41,52 +41,43 @@ public class CardPlayer implements Player {
         return (name != null && MIN_LENGTH <= name.length() && name.length() <= MAX_LENGTH);
     }
 
-    @Override
+
     public void takeDeck(List<Card> deck) {
         myDeck = deck;
     }
 
-    @Override
     public List<Card> getMyDeck() {
         return myDeck;
     }
 
-    @Override
     public String getName() {
         return name;
     }
 
-    @Override
     public int getMoney() {
         return money;
     }
 
-    @Override
     public int getWin() {
         return win;
     }
 
-    @Override
     public int getLoss() {
         return loss;
     }
 
-    @Override
     public void increaseWin() {
         win++;
     }
 
-    @Override
     public void increaseLoss() {
         loss++;
     }
 
-    @Override
     public void takeAward(int award) {
         money += award;
     }
 
-    @Override
     public int getTotalScore() {
         return win - loss;
     }
@@ -96,17 +87,14 @@ public class CardPlayer implements Player {
         this.score = score;
     }
 
-    @Override
     public int getScore() {
         return score;
     }
 
-    @Override
     public int isWinner(int otherScore) {
         return getTotalScore() == otherScore ? 0 : (getTotalScore() >= otherScore ? 1 : -1);
     }
 
-    @Override
     public int compareTo(Object o) {
         Player other = (Player) o;
 
@@ -119,7 +107,6 @@ public class CardPlayer implements Player {
         }
     }
 
-    @Override
     public String toString() {
         return "[name='" + name + '\'' +
                 ", money=" + money +

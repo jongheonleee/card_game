@@ -28,10 +28,8 @@ public class Deck implements GameComponent {
         // 52개 카드 생성
         // 각 문양당 밑에 범위만큼 카드 생성
         // A(14) > K(13) > Q(12) > J(11) > 10~2
-        for (String shape : patterns) {
-            for (int num = MIN_NUMBER; num<=MAX_NUMBER; num++) {
-                cards.add(new Card(shape, num));
-            }
+        for (int i=1; i<=52; i++) {
+            cards.add(new Card(i));
         }
     }
 
