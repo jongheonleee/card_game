@@ -4,68 +4,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import main.app.model.Card;
+import main.app.model.Ranking;
 
 public class CardGameCalculator implements Calculable {
 
     private final Map<Integer, Integer> numberMap = new HashMap<>();
     private final Map<Integer, Integer> kindMap = new HashMap<>();
-
-    private enum Score {
-        LOYAL_STRAIGHT_PLUSH(13),
-        BACK_STRAIGHT_PLUSH(12),
-        STRAIGHT_PLUSH(11),
-        FOUR_CARD(10),
-        PULL_HOUSE(9),
-        PLUSH(8),
-        MOUNTAIN(7),
-        BACK_STRAIGHT(6),
-        STRAIGHT(5),
-        TRIPLE(4),
-        TWO_PAIR(3),
-        ONE_PAIR(2),
-        NO_PAIR(1);
-
-        private final int score;
-
-        Score(int score) {
-            this.score = score;
-        }
-
-        public static int getScore(boolean isAllSameKind, boolean isAllDifferentKind, boolean isNumberInRow,
-                                   boolean isNumberInReverseRow, boolean isFirstNumber10, boolean isFirstNumberA,
-                                   boolean isSameNumber4, boolean isSameNumber3N2, boolean isTwoPair, boolean isOnePair) {
-            if (isAllSameKind && isNumberInRow && isFirstNumber10) {
-                return LOYAL_STRAIGHT_PLUSH.score;
-            } else if (isAllSameKind && isNumberInReverseRow && isFirstNumberA){
-                return BACK_STRAIGHT_PLUSH.score;
-            } else if (isAllSameKind && isNumberInRow) {
-                return STRAIGHT_PLUSH.score;
-            } else if (isSameNumber4) {
-                return FOUR_CARD.score;
-            } else if (isSameNumber3N2) {
-                return PULL_HOUSE.score;
-            } else if (isAllSameKind) {
-                return MOUNTAIN.score;
-            } else if (isAllDifferentKind && isNumberInRow) {
-                return BACK_STRAIGHT.score;
-            } else if (isAllDifferentKind && isNumberInReverseRow) {
-                return STRAIGHT.score;
-            } else if (isAllDifferentKind && isNumberInRow) {
-                return TRIPLE.score;
-            } else if (isTwoPair) {
-                return TWO_PAIR.score;
-            } else if (isOnePair) {
-                return ONE_PAIR.score;
-            } else {
-                return NO_PAIR.score;
-            }
-        }
-    }
     public CardGameCalculator() {
     }
 
     @Override
-    public int calculate(List<Card> cards) {
+    public int calculate(List<Card> cards, Ranking ranking) {
         clear();
 
         // 계산 지표
@@ -149,7 +98,7 @@ public class CardGameCalculator implements Calculable {
         }
 
 
-        return Score.getScore(isAllSameKind, isAllDifferentKind, isNumberInRow,
+        return ranking.getScore(isAllSameKind, isAllDifferentKind, isNumberInRow,
                               isNumberInReverseRow, isFirstNumber10, isFirstNumberA,
                               isSameNumber4, isSameNumber3N2, isTwoPair, isOnePair);
     }

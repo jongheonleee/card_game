@@ -12,6 +12,7 @@ import main.app.model.Player;
 import main.app.model.Dealer;
 import main.app.model.Deck;
 import main.app.model.Ground;
+import main.app.model.Ranking;
 import main.app.service.Calculable;
 import main.app.service.CardGameCalculator;
 import main.app.view.CardGameOutput;
@@ -37,7 +38,8 @@ public class AppContext {
                 target = (AppComponent) clazz.getDeclaredConstructor().newInstance();
             } else if (name.equals("dealer")) {
                 Calculable calculator = new CardGameCalculator();
-                target = (AppComponent) clazz.getConstructor(Calculable.class).newInstance(calculator);
+                Ranking ranking = new Ranking();
+                target = (AppComponent) clazz.getConstructor(Calculable.class, Ranking.class).newInstance(calculator, ranking);
             } else if (name.equals("players")) {
                 List<Player> list = new ArrayList<>();
                 int numberOfPlayer = appComponentView.getNumberOfPlayer();

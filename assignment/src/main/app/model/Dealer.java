@@ -8,16 +8,18 @@ import main.framework.domain.AppComponent;
 public class Dealer implements AppComponent {
 
     private final Calculable strategy;
+    private final Ranking ranking;
 
-    public Dealer(Calculable strategy) {
+    public Dealer(Calculable strategy, Ranking ranking) {
         this.strategy = strategy;
+        this.ranking = ranking;
     }
 
 
     // 각 플레이어의 점수 계산, 비교 대상, 비교 기준
     public void calculateScore(List<Player> players) {
         for (Player player : players) {
-            int score = strategy.calculate(player.getMyDeck());
+            int score = strategy.calculate(player.getMyDeck(), ranking);
             player.setScore(score);
         }
     }
