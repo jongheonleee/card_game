@@ -1,5 +1,6 @@
 package main.app.model;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,25 +25,22 @@ public class Ground implements AppComponent {
 
     // 승자 발표, 승점 패점 부여
     public List<Player> decideWinnerInRound(int award) {
+        List<Player> winners = new ArrayList<>();
+
         int maxScore = players.stream()
                 .mapToInt(player -> player.getScore())
                 .max()
                 .getAsInt();
 
-        players.stream()
-                .filter(player -> player.getScore() == maxScore)
-                .forEach(player -> {
-                    player.increaseWin();
-                    player.takeAward(award);
-                });
-
-        players.stream()
-                .filter(player -> player.getScore() != maxScore)
-                .forEach(player -> player.increaseLoss());
-
-        List<Player> winners = players.stream()
-                .filter(player -> player.getScore() == maxScore)
-                .collect(Collectors.toList());
+        for (Player player : players) {
+            if (player.getScore() == maxScore) {
+                player.increaseWin();
+                player.takeAward(award);
+                winners.add(player);
+            } else {
+                player.increaseLoss();
+            }
+        }
 
         return winners;
     }
